@@ -1,3 +1,5 @@
+import kotlin.math.roundToLong
+
 fun login(){
 /* Funkcja weryfikująca zgodność loginu i hasła. Jeżeli prawda, to przechodzi do menu "menuChoice()",
 jeżeli nie prawda, to uruchamia się pętla */
@@ -58,7 +60,7 @@ wywołana) lub powrocie do menu głównego "menuChoice()"  */
     do {
 
         println()
-        println("Czy chcesz ponownie uruchomić program Stoper (T), czy chcesz wrócić do menu (N)?")
+        println("Czy chcesz ponownie uruchomić program (T), czy chcesz wrócić do menu (N)?")
         choice = readLine()!!.toUpperCase()
 
         if (choice == "T") {
@@ -114,18 +116,18 @@ fun sum() {
 
 /*Funkcja obliczająca sumę dwóch liczb wprowadzanych przez użytkownika*/
 
-    var a: Int
-    var b: Int
-    var sumab: Int
+    var a: Double
+    var b: Double
+    var sumab: Double
     var choice: String
 
     println("Obliczanie sumy dwóch liczb a i b")
 
             print("Wprowadź a = ")
-            a = readLine()!!.toInt()
+            a = readLine()!!.toDouble()
 
             print("Wprowadź b = ")
-            b = readLine()!!.toInt()
+            b = readLine()!!.toDouble()
 
             sumab = a + b
             println("Suma $a + $b = $sumab")
