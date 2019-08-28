@@ -1,50 +1,30 @@
-import kotlin.math.roundToLong
-
 fun login(){
 /* Funkcja weryfikująca zgodność loginu i hasła. Jeżeli prawda, to przechodzi do menu "menuChoice()",
 jeżeli nie prawda, to uruchamia się pętla */
 
-    val CorrectLogin: String = "pawel"
-    val CorrectPassword: String = "123"
+    val correctLogin: String = "pawel"
+    val correctPassword: String = "123"
 
-    var Login: String?
-    var Password: String?
+    var login: String?
+    var password: String?
 
     do {
 
-        while(true) {
-
+            println()
             print("Podaj login: ")
-            Login = readLine()!!
-
-            if(Login.length == 0){
-                println("Pole Login nie może być puste")
-            }
-            else {
-                break
-            }
-
-        }
-
-        while(true) {
+            login = readLine()!!
 
             print("Podaj hasło: ")
-            Password = readLine()!!
+            password = readLine()!!
 
-            if(Password.length == 0){
-                println("Pole hasło nie może byc puste")
-            }
-            else{
-                break
-            }
+        if(login != correctLogin || password != correctPassword){
 
-        }
-
-        if(Login != CorrectLogin || Password != CorrectPassword){
+            println()
             println("Błędny login lub hasło")
+
         }
 
-    }while(Login != CorrectLogin || Password != CorrectPassword)
+    }while(login != correctLogin || password != correctPassword)
 
     menuChoice()
 
@@ -57,6 +37,7 @@ fun choiceAfterProgram(Program: Int) {
 wywołana) lub powrocie do menu głównego "menuChoice()"  */
 
     var choice: String
+
     do {
 
         println()
@@ -85,16 +66,31 @@ fun menuChoice() {
 
     println()
     println("Opcje menu:")
+    println()
     println("1- Dodawanie dwóch liczb")
     println("2- Stoper")
-    println("3- Funkcja kwadratowa")
-    println("4- Wyloguj się")
+    println("3- Wyloguj się")
 
-    var MenuNumber: Int
+       try {
 
-    MenuNumber = readLine()!!.toInt()
+           var menuNumber: Int = readLine()!!.toInt()
 
-    menu(MenuNumber)
+           if (menuNumber < 0 || menuNumber > 3) {
+
+               println("Błędny numer opcji!- spróbuj ponownie")
+               menuChoice()
+
+           }
+
+           menu(menuNumber)
+
+
+       } catch (exception: NumberFormatException) {
+
+           println("Błędny numer opcji!- spróbuj ponownie")
+           menuChoice()
+
+       }
 
 }
 
@@ -106,7 +102,7 @@ fun menu(MenuNumber: Int){
 
         1 -> sum()
         2 -> stopwatch()
-        4 -> login()
+        3 -> login()
 
     }
 
@@ -118,20 +114,31 @@ fun sum() {
 
     var a: Double
     var b: Double
-    var sumab: Double
-    var choice: String
 
+    println()
     println("Obliczanie sumy dwóch liczb a i b")
 
-            print("Wprowadź a = ")
-            a = readLine()!!.toDouble()
+    try {
 
-            print("Wprowadź b = ")
-            b = readLine()!!.toDouble()
+        println()
+        print("Wprowadź a = ")
+        a = readLine()!!.toDouble()
 
-            sumab = a + b
-            println("Suma $a + $b = $sumab")
+        print("Wprowadź b = ")
+        b = readLine()!!.toDouble()
 
+
+        println()
+        println("Suma $a + $b = ${a + b}")
+
+    }
+
+    catch (exception: NumberFormatException){
+
+        println()
+        println("Błędna wartość- spróbuj ponownie, program oczekuje liczby!")
+
+    }
 
     choiceAfterProgram(1)
 
@@ -141,20 +148,45 @@ fun stopwatch(){
 
 /*Fukcja odliczająca sekundy od wartości podanej przez użytkownika*/
 
-    print("Wprowadź czas: ")
-    var time: Int = readLine()!!.toInt()
 
-    for(i in time downTo 0)
-    {
-        if(i != 0)
-        {
-            println(i)
-            Thread.sleep(1000)
+    println()
+    print("Wprowadź czas: ")
+
+    try {
+
+        var time: Int= readLine()!!.toInt()
+
+        if(time < 0) throw ArithmeticException("Błedna wartość- podaj ponownie prawidłowy czas! Wartość powinna być większa od 0")
+
+        for(i in time downTo 0) {
+
+            if(i != 0) {
+
+                println(i)
+                Thread.sleep(1000)
+            }
+            else {
+
+                println("Koniec czasu!!!")
+            }
+
         }
-        else
-        {
-            println("Koniec czasu!!!")
-        }
+
+    }
+
+    catch (exception: NumberFormatException) {
+
+        println()
+        println("Błędna wartość- podaj ponownie prawidłowy czas!")
+        println()
+
+    }
+
+    catch (exception: ArithmeticException){
+
+        println()
+        println(exception.message)
+        println()
 
     }
 
