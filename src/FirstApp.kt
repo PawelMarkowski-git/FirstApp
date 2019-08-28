@@ -2,29 +2,29 @@ fun login(){
 /* Funkcja weryfikująca zgodność loginu i hasła. Jeżeli prawda, to przechodzi do menu "menuChoice()",
 jeżeli nie prawda, to uruchamia się pętla */
 
-    val CorrectLogin: String = "pawel"
-    val CorrectPassword: String = "123"
+    val correctLogin: String = "pawel"
+    val correctPassword: String = "123"
 
-    var Login: String?
-    var Password: String?
+    var login: String?
+    var password: String?
 
     do {
 
             println()
             print("Podaj login: ")
-            Login = readLine()!!
+            login = readLine()!!
 
             print("Podaj hasło: ")
-            Password = readLine()!!
+            password = readLine()!!
 
-        if(Login != CorrectLogin || Password != CorrectPassword){
+        if(login != correctLogin || password != correctPassword){
 
             println()
             println("Błędny login lub hasło")
 
         }
 
-    }while(Login != CorrectLogin || Password != CorrectPassword)
+    }while(login != correctLogin || password != correctPassword)
 
     menuChoice()
 
@@ -66,22 +66,23 @@ fun menuChoice() {
 
     println()
     println("Opcje menu:")
+    println()
     println("1- Dodawanie dwóch liczb")
     println("2- Stoper")
     println("3- Wyloguj się")
 
        try {
 
-           var MenuNumber: Int = readLine()!!.toInt()
+           var menuNumber: Int = readLine()!!.toInt()
 
-           if (MenuNumber < 0 || MenuNumber > 3) {
+           if (menuNumber < 0 || menuNumber > 3) {
 
                println("Błędny numer opcji!- spróbuj ponownie")
                menuChoice()
 
            }
 
-           menu(MenuNumber)
+           menu(menuNumber)
 
 
        } catch (exception: NumberFormatException) {
@@ -114,10 +115,12 @@ fun sum() {
     var a: Double
     var b: Double
 
+    println()
     println("Obliczanie sumy dwóch liczb a i b")
 
     try {
 
+        println()
         print("Wprowadź a = ")
         a = readLine()!!.toDouble()
 
@@ -146,6 +149,7 @@ fun stopwatch(){
 /*Fukcja odliczająca sekundy od wartości podanej przez użytkownika*/
 
 
+    println()
     print("Wprowadź czas: ")
 
     try {
