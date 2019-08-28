@@ -10,36 +10,18 @@ jeżeli nie prawda, to uruchamia się pętla */
 
     do {
 
-        while(true) {
-
+            println()
             print("Podaj login: ")
             Login = readLine()!!
-
-            if(Login.length == 0){
-                println("Pole Login nie może być puste")
-            }
-            else {
-                break
-            }
-
-        }
-
-        while(true) {
 
             print("Podaj hasło: ")
             Password = readLine()!!
 
-            if(Password.length == 0){
-                println("Pole hasło nie może byc puste")
-            }
-            else{
-                break
-            }
-
-        }
-
         if(Login != CorrectLogin || Password != CorrectPassword){
+
+            println()
             println("Błędny login lub hasło")
+
         }
 
     }while(Login != CorrectLogin || Password != CorrectPassword)
@@ -55,6 +37,7 @@ fun choiceAfterProgram(Program: Int) {
 wywołana) lub powrocie do menu głównego "menuChoice()"  */
 
     var choice: String
+
     do {
 
         println()
