@@ -1,5 +1,3 @@
-import kotlin.math.roundToLong
-
 fun login(){
 /* Funkcja weryfikująca zgodność loginu i hasła. Jeżeli prawda, to przechodzi do menu "menuChoice()",
 jeżeli nie prawda, to uruchamia się pętla */
@@ -87,14 +85,28 @@ fun menuChoice() {
     println("Opcje menu:")
     println("1- Dodawanie dwóch liczb")
     println("2- Stoper")
-    println("3- Funkcja kwadratowa")
-    println("4- Wyloguj się")
+    println("3- Wyloguj się")
 
-    var MenuNumber: Int
+       try {
 
-    MenuNumber = readLine()!!.toInt()
+           var MenuNumber: Int = readLine()!!.toInt()
 
-    menu(MenuNumber)
+           if (MenuNumber < 0 || MenuNumber > 3) {
+
+               println("Błędny numer opcji!- spróbuj ponownie")
+               menuChoice()
+
+           }
+
+           menu(MenuNumber)
+
+
+       } catch (exception: NumberFormatException) {
+
+           println("Błędny numer opcji!- spróbuj ponownie")
+           menuChoice()
+
+       }
 
 }
 
@@ -106,7 +118,7 @@ fun menu(MenuNumber: Int){
 
         1 -> sum()
         2 -> stopwatch()
-        4 -> login()
+        3 -> login()
 
     }
 
@@ -118,20 +130,29 @@ fun sum() {
 
     var a: Double
     var b: Double
-    var sumab: Double
-    var choice: String
 
     println("Obliczanie sumy dwóch liczb a i b")
 
-            print("Wprowadź a = ")
-            a = readLine()!!.toDouble()
+    try {
 
-            print("Wprowadź b = ")
-            b = readLine()!!.toDouble()
+        print("Wprowadź a = ")
+        a = readLine()!!.toDouble()
 
-            sumab = a + b
-            println("Suma $a + $b = $sumab")
+        print("Wprowadź b = ")
+        b = readLine()!!.toDouble()
 
+
+        println()
+        println("Suma $a + $b = ${a + b}")
+
+    }
+
+    catch (exception: NumberFormatException){
+
+        println()
+        println("Błędna wartość- spróbuj ponownie, program oczekuje liczby!")
+
+    }
 
     choiceAfterProgram(1)
 
@@ -141,20 +162,44 @@ fun stopwatch(){
 
 /*Fukcja odliczająca sekundy od wartości podanej przez użytkownika*/
 
-    print("Wprowadź czas: ")
-    var time: Int = readLine()!!.toInt()
 
-    for(i in time downTo 0)
-    {
-        if(i != 0)
-        {
-            println(i)
-            Thread.sleep(1000)
+    print("Wprowadź czas: ")
+
+    try {
+
+        var time: Int= readLine()!!.toInt()
+
+        if(time < 0) throw ArithmeticException("Błedna wartość- podaj ponownie prawidłowy czas! Wartość powinna być większa od 0")
+
+        for(i in time downTo 0) {
+
+            if(i != 0) {
+
+                println(i)
+                Thread.sleep(1000)
+            }
+            else {
+
+                println("Koniec czasu!!!")
+            }
+
         }
-        else
-        {
-            println("Koniec czasu!!!")
-        }
+
+    }
+
+    catch (exception: NumberFormatException) {
+
+        println()
+        println("Błędna wartość- podaj ponownie prawidłowy czas!")
+        println()
+
+    }
+
+    catch (exception: ArithmeticException){
+
+        println()
+        println(exception.message)
+        println()
 
     }
 
