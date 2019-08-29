@@ -1,3 +1,5 @@
+import kotlin.math.*
+
 fun login(){
 /* Funkcja weryfikująca zgodność loginu i hasła. Jeżeli prawda, to przechodzi do menu "menuChoice()",
 jeżeli nie prawda, to uruchamia się pętla */
@@ -69,13 +71,14 @@ fun menuChoice() {
     println()
     println("1- Dodawanie dwóch liczb")
     println("2- Stoper")
-    println("3- Wyloguj się")
+    println("3- Funkcja kwadratowa")
+    println("4- Wyloguj się")
 
        try {
 
            var menuNumber: Int = readLine()!!.toInt()
 
-           if (menuNumber < 0 || menuNumber > 3) {
+           if (menuNumber < 0 || menuNumber > 4) {
 
                println("Błędny numer opcji!- spróbuj ponownie")
                menuChoice()
@@ -102,7 +105,8 @@ fun menu(MenuNumber: Int){
 
         1 -> sum()
         2 -> stopwatch()
-        3 -> login()
+        3 -> quadraticF()
+        4 -> login()
 
     }
 
@@ -193,6 +197,127 @@ fun stopwatch(){
    choiceAfterProgram(2)
 }
 
+fun quadraticF(){
+
+    println()
+    println("Program obliczający miejsca zerowe funkcji kwadratowej y = ax2 + bx + c")
+    println()
+
+    try {
+
+        print("Wprowadź parametr a = ")
+        var a: Double = readLine()!!.toDouble()
+
+        print("Wprowadź parametr b = ")
+        var b: Double= readLine()!!.toDouble()
+
+        print("Wprowadź parametr c = ")
+        var c: Double= readLine()!!.toDouble()
+        println()
+
+        if (a == 0.0){
+
+            println("To nie jest funkcja kwadratowa, parametr a nie może być zerem")
+
+        }
+        else {
+
+
+            var delta: Double = b.pow(2) - 4 * a * c
+
+            println()
+            println("Delta b2 - 4*a*c = $delta")
+            println()
+
+            var formFunction: String = ""
+            var quantitiPlacesZero: String = ""
+
+            if (a > 0) {
+
+                formFunction = "jest skierowana ramionami w górę"
+
+            } else if (a < 0) {
+
+                formFunction = "jest skierowana ramionami w dół"
+
+            }
+
+            if (delta > 0) {
+
+                quantitiPlacesZero = "ma dwa miejsca zerowe"
+
+            } else if (delta < 0) {
+
+                quantitiPlacesZero = "nie ma miejsc zerowych"
+
+            } else if (delta == 0.0) {
+
+                var quantitiPlacesZero: String = "ma tylko jedno miejsce zerowe"
+
+            }
+
+
+            println()
+            println("Funkcja $a*x^2 + $b*x + $c $formFunction oraz $quantitiPlacesZero")
+            println()
+
+            if (delta > 0.0) {
+
+                var x1: Double = (-b - sqrt(delta)) / 2 * a
+                var x2: Double = (-b + sqrt(delta)) / 2 * a
+
+                println("x1 = ${round(x1 * 100) / 100}")
+                println("x2 = ${round(x2 * 100) / 100}")
+
+            } else if (delta == 0.0) {
+
+                var x: Double = -b / 2 * a
+
+                println("x = $x")
+
+            } else {
+
+                println()
+
+            }
+        }
+    }
+    catch (exception: NumberFormatException){
+
+        println("Wprowadzona wartość nie jest liczbą")
+
+    }
+
+      do {
+
+          println()
+          println("Czy chcesz obliczyć wartości funkcji dla wybranych argumentów/zakresu argumentów- Tak(T) Nie(N)?")
+
+          var choice: String = readLine()!!.toUpperCase()
+
+          if (choice == "T") {
+
+              CalculationQuadraticFunction()
+
+          } else if (choice != "T" && choice != "N") {
+
+              println("Błędny wybór- dostępne wybory (T) lub (N)")
+
+          }
+
+      }while (choice != "T" && choice != "N")
+
+    choiceAfterProgram(3)
+
+}
+
+fun CalculationQuadraticFunction(){
+
+    println("Obliczanie wartości funkcj kwadratowej dla wybrancyh argumentów")
+
+    choiceAfterProgram(3)
+
+}
 
 fun main(args: Array<String>) {
 
