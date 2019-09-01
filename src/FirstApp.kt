@@ -226,6 +226,7 @@ fun quadraticF(){
             println("To nie jest funkcja kwadratowa, parametr a nie może być zerem")
 
         }
+
         else {
 
 
@@ -294,28 +295,28 @@ fun quadraticF(){
                 println()
 
             }
+
+
+            do {
+
+                println()
+                println("Czy chcesz obliczyć wartości funkcji dla wybranych argumentów/zakresu argumentów- Tak(T) Nie(N)?")
+
+                var choice: String = readLine()!!.toUpperCase()
+
+                if (choice == "T") {
+
+                    CalculationQuadraticFunction(a,b,c)
+
+                } else if (choice != "T" && choice != "N") {
+
+                    println("Błędny wybór- dostępne wybory (T) lub (N)")
+
+                }
+
+            }while (choice != "T" && choice != "N")
+
         }
-
-
-        do {
-
-            println()
-            println("Czy chcesz obliczyć wartości funkcji dla wybranych argumentów/zakresu argumentów- Tak(T) Nie(N)?")
-
-            var choice: String = readLine()!!.toUpperCase()
-
-            if (choice == "T") {
-
-                CalculationQuadraticFunction(a,b,c)
-
-            } else if (choice != "T" && choice != "N") {
-
-                println("Błędny wybór- dostępne wybory (T) lub (N)")
-
-            }
-
-        }while (choice != "T" && choice != "N")
-
 
     }
     catch (exception: NumberFormatException){
@@ -365,13 +366,18 @@ fun CalculationQuadraticFunction(a: Double,b: Double,c: Double){
             stepFun = readLine()!!.toDouble()
             println()
 
-            if (stepFun < endValue - firstValue){
+            if (stepFun > endValue - firstValue){
 
                 println("Wartość kroku nie może być większa od rożnicy pomiędzy zakresem do i od")
 
             }
+            else if(stepFun <= 0.0){
 
-        }while (stepFun > endValue - firstValue)
+                println("Wartość kroku nie może być <= 0")
+
+            }
+
+        }while (stepFun > endValue - firstValue || stepFun <= 0.0)
 
 
     var valueOfArgument: Double
