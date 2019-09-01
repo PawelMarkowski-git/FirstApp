@@ -204,9 +204,9 @@ fun quadraticF(){
     println("Program obliczający miejsca zerowe funkcji kwadratowej y = ax2 + bx + c")
     println()
 
-    var a: Double = 0.0
-    var b: Double = 0.0
-    var c: Double = 0.0
+    var a: Double
+    var b: Double
+    var c: Double
 
 
     try {
@@ -333,8 +333,8 @@ fun CalculationQuadraticFunction(a: Double,b: Double,c: Double){
     println("Obliczanie wartości funkcj kwadratowej dla wybranego zakresu argumentów")
     println()
 
-        var firstValue: Double = 0.0
-        var endValue: Double = 0.0
+        var firstValue: Double
+        var endValue: Double
 
         do {
 
