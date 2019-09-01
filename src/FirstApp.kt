@@ -1,3 +1,4 @@
+import com.sun.jdi.event.StepEvent
 import kotlin.math.*
 
 fun login(){
@@ -203,16 +204,21 @@ fun quadraticF(){
     println("Program obliczający miejsca zerowe funkcji kwadratowej y = ax2 + bx + c")
     println()
 
+    var a: Double = 0.0
+    var b: Double = 0.0
+    var c: Double = 0.0
+
+
     try {
 
         print("Wprowadź parametr a = ")
-        var a: Double = readLine()!!.toDouble()
+        a = readLine()!!.toDouble()
 
         print("Wprowadź parametr b = ")
-        var b: Double= readLine()!!.toDouble()
+        b = readLine()!!.toDouble()
 
         print("Wprowadź parametr c = ")
-        var c: Double= readLine()!!.toDouble()
+        c = readLine()!!.toDouble()
         println()
 
         if (a == 0.0){
@@ -226,7 +232,7 @@ fun quadraticF(){
             var delta: Double = b.pow(2) - 4 * a * c
 
             println()
-            println("Delta b2 - 4*a*c = $delta")
+            println("Delta b2 - 4*a*c = ${round(delta * 100) / 100}")
             println()
 
             var formFunction: String = ""
@@ -242,17 +248,17 @@ fun quadraticF(){
 
             }
 
-            if (delta > 0) {
+            if (delta > 0.0) {
 
                 quantitiPlacesZero = "ma dwa miejsca zerowe"
 
-            } else if (delta < 0) {
+            } else if (delta < 0.0) {
 
                 quantitiPlacesZero = "nie ma miejsc zerowych"
 
             } else if (delta == 0.0) {
 
-                var quantitiPlacesZero: String = "ma tylko jedno miejsce zerowe"
+                quantitiPlacesZero = "ma tylko jedno miejsce zerowe"
 
             }
 
@@ -263,8 +269,8 @@ fun quadraticF(){
 
             if (delta > 0.0) {
 
-                var x1: Double = (-b - sqrt(delta)) / 2 * a
-                var x2: Double = (-b + sqrt(delta)) / 2 * a
+                var x1: Double = (-b + sqrt(delta)) / (2 * a)
+                var x2: Double = (-b - sqrt(delta)) / (2 * a)
 
                 println("x1 = ${round(x1 * 100) / 100}")
                 println("x2 = ${round(x2 * 100) / 100}")
@@ -273,7 +279,15 @@ fun quadraticF(){
 
                 var x: Double = -b / 2 * a
 
+                if (x == -0.0){
+
+                    x = 0.0
+
+                }
+
+
                 println("x = $x")
+
 
             } else {
 
@@ -281,6 +295,28 @@ fun quadraticF(){
 
             }
         }
+
+
+        do {
+
+            println()
+            println("Czy chcesz obliczyć wartości funkcji dla wybranych argumentów/zakresu argumentów- Tak(T) Nie(N)?")
+
+            var choice: String = readLine()!!.toUpperCase()
+
+            if (choice == "T") {
+
+                CalculationQuadraticFunction(a,b,c)
+
+            } else if (choice != "T" && choice != "N") {
+
+                println("Błędny wybór- dostępne wybory (T) lub (N)")
+
+            }
+
+        }while (choice != "T" && choice != "N")
+
+
     }
     catch (exception: NumberFormatException){
 
@@ -288,32 +324,93 @@ fun quadraticF(){
 
     }
 
-      do {
-
-          println()
-          println("Czy chcesz obliczyć wartości funkcji dla wybranych argumentów/zakresu argumentów- Tak(T) Nie(N)?")
-
-          var choice: String = readLine()!!.toUpperCase()
-
-          if (choice == "T") {
-
-              CalculationQuadraticFunction()
-
-          } else if (choice != "T" && choice != "N") {
-
-              println("Błędny wybór- dostępne wybory (T) lub (N)")
-
-          }
-
-      }while (choice != "T" && choice != "N")
-
     choiceAfterProgram(3)
 
 }
 
-fun CalculationQuadraticFunction(){
+fun CalculationQuadraticFunction(a: Double,b: Double,c: Double){
 
-    println("Obliczanie wartości funkcj kwadratowej dla wybrancyh argumentów")
+    println("Obliczanie wartości funkcj kwadratowej dla wybranego zakresu argumentów")
+    println()
+
+        var firstValue: Double = 0.0
+        var endValue: Double = 0.0
+
+        do {
+
+            print("Wprowadź początek zakresu od: ")
+            firstValue = readLine()!!.toDouble()
+            println()
+
+            print("Wprowadź koniec zakresu do: ")
+            endValue = readLine()!!.toDouble()
+            println()
+
+            if (firstValue > endValue){
+
+                println("Wartość zakresu od nie może być większa od wartości do")
+                println()
+
+            }
+
+        }while (firstValue > endValue)
+
+
+        var stepFun: Double
+
+
+        do {
+
+            print("Wprowadź krok dla podanego zakresu: ")
+            stepFun = readLine()!!.toDouble()
+            println()
+
+            if (stepFun < endValue - firstValue){
+
+                println("Wartość kroku nie może być większa od rożnicy pomiędzy zakresem do i od")
+
+            }
+
+        }while (stepFun > endValue - firstValue)
+
+
+    var valueOfArgument: Double
+    var arraySize: Int = 0
+
+        valueOfArgument = firstValue
+
+        while (valueOfArgument <= endValue){
+
+            valueOfArgument = valueOfArgument + stepFun
+
+            arraySize = arraySize + 1
+
+        }
+
+
+            var argumentsArray = arrayOfNulls<Double>(arraySize)
+
+
+            valueOfArgument = firstValue
+
+            argumentsArray[0] = valueOfArgument
+
+            for (i in 1..arraySize - 1) {
+
+                argumentsArray[i] = valueOfArgument + stepFun
+
+                valueOfArgument = valueOfArgument + stepFun
+
+            }
+
+            for (arguments in argumentsArray){
+
+                var argument: Double = arguments!!.toDouble()
+
+                println("Dla argumentu = ${round(argument * 100) / 100} funkcja otrzymuje wartość = ${round(((a*argument.pow(2) + b*argument + c) * 100)/100)}")
+
+            }
+
 
     choiceAfterProgram(3)
 
