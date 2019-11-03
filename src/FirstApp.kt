@@ -1,37 +1,5 @@
 import kotlin.math.*
 
-fun login(){
-/* Funkcja weryfikująca zgodność loginu i hasła. Jeżeli prawda, to przechodzi do menu "menuChoice()",
-jeżeli nie prawda, to uruchamia się pętla */
-
-    val correctLogin: String = "pawel"
-    val correctPassword: String = "123"
-
-    var login: String?
-    var password: String?
-
-    do {
-
-            println()
-            print("Podaj login: ")
-            login = readLine()!!
-
-            print("Podaj hasło: ")
-            password = readLine()!!
-
-        if(login != correctLogin || password != correctPassword){
-
-            println()
-            println("Błędny login lub hasło")
-
-        }
-
-    }while(login != correctLogin || password != correctPassword)
-
-    menuChoice()
-
-}
-
 fun choiceAfterProgram(Program: Int) {
 
 /*Funkcja uruchamiana po zakończeniu działania wybranego programu. Użytkownik decyduje o ponownym uruchomieniu programu
