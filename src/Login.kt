@@ -1,23 +1,18 @@
-fun login(){
+class Login {
 
-    println()
-    println("***************************************************************************************")
-    println("**************                    Logowanie                         *******************")
-    println("***************************************************************************************")
+    private val correctLogin = arrayOf("pawel","pawel2","pawel13")
+    private val correctPassword = arrayOf("123","321","pawel13")
 
+    private var login: String? = null
+    private var password: String? = null
 
-    val correctLogin = arrayOf("pawel","pawel2","pawel13")
-    val correctPassword = arrayOf("123","321","pawel13")
+    fun checkLoginAndPassword(){
 
-    var login: String?
-    var password: String?
+        do {
 
-
-    do {
-
-        var indexOfArrayCorrectLogin: Int = 0
-        var successLogin: Boolean = true
-        var issetLogin: Boolean = false
+            var indexOfArrayCorrectLogin: Int = 0
+            var successLogin: Boolean = false
+            var issetLogin: Boolean = false
 
             println()
             print("Podaj login: ")
@@ -38,15 +33,17 @@ fun login(){
             when {
 
                 indexOfArrayCorrectLogin == correctLogin.size -> {println("Taki użytkownik nie istnieje")
-                                                                  successLogin = false}
+                    successLogin = false}
 
                 password != correctPassword[indexOfArrayCorrectLogin] -> {println("Błędne hasło")
-                                                                          successLogin = false}
+                    successLogin = false}
 
-                password == correctPassword[indexOfArrayCorrectLogin] -> menuChoice()
+                password == correctPassword[indexOfArrayCorrectLogin] -> Menu().menuChoice()
 
             }
 
-    }while(!successLogin)
+        }while(!successLogin)
+
+    }
 
 }
